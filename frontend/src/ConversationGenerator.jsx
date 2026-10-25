@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const API_URL = 'http://127.0.0.1:8000'
+const API_URL = (import.meta.env.VITE_API_URL || 'https://sentioguard-gateway.gayassheik77.workers.dev').replace(/\/$/, '')
 const EMOTIONS = ['none', 'angry', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise']
 const INITIAL_TURNS = [
   { character: 'alice', dialogue: 'Hello Bob, how are you?', emotion: 'happy', strength: 1, duration: 3, audio: null, audioUrl: null },
