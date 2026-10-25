@@ -1,0 +1,22 @@
+{
+  "name": "float-ai-talking-video-generator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test:browser": "node scripts/browser-smoke-test.mjs",
+    "test:conversation": "node scripts/browser-conversation-smoke-test.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}
