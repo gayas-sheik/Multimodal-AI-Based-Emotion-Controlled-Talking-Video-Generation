@@ -1,121 +1,246 @@
-# Multimodal AI-Based Emotion-Controlled Talking Video Generation
 
-Live Demo: SentioGaurd AI
-https://sentioguard-ai-web.pages.dev/
+# SentioGuard AI
+## Multimodal AI-Based Emotion-Controlled Talking Video Generation
 
-## 📌 Project Overview
+**Live website:** https://sentioguard-ai-web.pages.dev/
 
-This project aims to develop a multimodal AI system that generates realistic, emotion-aware talking-face videos using a reference face image and speech audio.
+SentioGuard AI is a web application for generating emotion-controlled talking-head videos. It combines a reference portrait, speech audio, and a selected emotion to generate a video using the existing FLOAT/ComfyUI pipeline.
 
-The system will analyse speech audio to identify emotional characteristics and use audio features, facial motion prediction, and deep learning-based video generation techniques to produce a talking video with synchronised lip movements and emotion-related facial expressions.
+## Features
 
-The goal is to preserve the identity of the person in the reference image while generating natural facial movements that correspond to the input speech.
+- **Talking-head generation:** Generate a video from a reference image and speech audio.
+- **Emotion control:** Select a supported emotion and adjust its strength.
+- **Conversation generation:** Create a two-character conversation with Alice and Bob across three sequential dialogue turns.
+- **Video output:** View and download the generated MP4.
+- **Web interface:** React-based frontend connected to a FastAPI backend.
 
-## 🎯 Objectives
-
-* Develop an audio-processing pipeline to extract meaningful speech features.
-* Identify emotional characteristics from speech audio.
-* Preprocess video datasets and extract facial information for model training.
-* Predict facial movements corresponding to speech.
-* Generate talking-face video frames while preserving the reference identity.
-* Improve temporal consistency between consecutive frames.
-* Synchronise the generated video with the original speech audio.
-
-## ⚙️ Proposed System Workflow
-
-The proposed system follows these stages:
-
-1. **Input Processing:** Accept a reference face image and speech audio.
-2. **Audio Preprocessing:** Process the audio and extract relevant acoustic features.
-3. **Emotion Recognition:** Estimate emotional characteristics from the speech.
-4. **Facial Motion Prediction:** Predict speech-related facial movements.
-5. **Video Generation:** Generate facial frames conditioned on the reference image, speech features, and predicted emotional characteristics.
-6. **Temporal Consistency:** Reduce unwanted variations between consecutive frames.
-7. **Audio-Video Synchronisation:** Combine the generated frames with the original audio.
-8. **Output:** Produce an emotion-aware talking-face video.
-
-## 🧠 Technologies
-
-The following technologies are planned for the project:
-
-* **Programming Language:** Python
-* **Deep Learning Framework:** PyTorch
-* **Computer Vision:** OpenCV
-* **Audio Processing:** Librosa, NumPy
-* **Video Processing:** FFmpeg
-* **Data Analysis:** Pandas, Scikit-learn
-* **Version Control:** Git and GitHub
-
-The final technology stack may change during implementation.
-
-## 🗂️ Planned Project Structure
+## Architecture
 
 ```text
-Multimodal-AI-Based-Emotion-Controlled-Talking-Video-Generation/
-│
-├── README.md
-├── .gitignore
-├── requirements.txt
-├── configs/
-├── data/
-├── checkpoints/
-├── scripts/
-├── src/
-│   ├── audio_processing/
-│   ├── emotion_recognition/
-│   ├── video_preprocessing/
-│   ├── facial_motion/
-│   └── video_generation/
-├── tests/
-└── outputs/
+User
+ |
+ v
+React + Vite Frontend
+ |
+ v
+Cloudflare Worker Gateway
+ |
+ v
+FastAPI Backend
+ |
+ v
+FLOAT / ComfyUI Pipeline
+ |
+ v
+Generated MP4
 ```
 
-This is the proposed structure. Directories and modules will be added as development progresses.
+The deployed website uses Cloudflare Pages. The Worker gateway forwards API requests to the backend and is configured separately in Cloudflare. Video generation requires the backend machine and its FLOAT/ComfyUI environment to be running and reachable.
 
-## 📊 Dataset and Training
+The Cloudflare Worker source is not included in this repository.
 
-The project will require suitable audio-video datasets containing speech recordings and corresponding facial movements. Emotion-labelled data will be used where available and appropriate.
+## Technology Stack
 
-Planned data preparation tasks include:
+| Component | Technology |
+|---|---|
+| Frontend | React, Vite, JavaScript |
+| Backend API | Python, FastAPI, Uvicorn |
+| Video generation | FLOAT with ComfyUI |
+| Frontend deployment | Cloudflare Pages |
+| API gateway | Cloudflare Workers |
+| Backend connectivity | Cloudflare Tunnel, when available |
+| Browser testing | Playwright Core with Microsoft Edge |
 
-* Audio preprocessing and feature extraction.
-* Video frame extraction and resizing.
-* Face detection and alignment.
-* Audio-video temporal synchronisation.
-* Emotion label preparation.
-* Training, validation, and test dataset splitting.
+## Project Structure
 
-Dataset selection, model architecture, and training configurations will be finalised during development.
+```text
+FloatWebApp/
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── run.py
+│   │   └── routes/
+│   ├── conversation/
+│   ├── test_data/
+│   ├── vendor/
+│   └── requirements-api.txt
+├── frontend/
+│   ├── src/
+│   ├── scripts/
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
+├── .env.example
+├── .gitignore
+└── README.md
+```
 
-## 🚀 Expected Outcome
+This is a simplified overview; consult the repository for the complete structure.
 
-The intended outcome is a web-based AI application that accepts a reference face image and speech audio and generates a talking-face video with:
+## Requirements
 
-* Speech-synchronised lip movements.
-* Emotion-related facial expressions inferred from audio.
-* Preservation of the reference person's facial identity.
-* Temporally consistent generated frames.
-* An output video containing the original speech audio.
+- Windows is used by the current development setup.
+- Node.js and npm.
+- An existing portable ComfyUI installation containing the FLOAT workflow and required models.
+- The Python environment supplied with that installation.
+- Cloudflare Tunnel and a configured Worker if using the deployed frontend with a locally hosted backend.
 
-These are project goals; the final performance and capabilities will be evaluated after implementation and testing.
+FLOAT model files and the portable ComfyUI installation are external dependencies and are not included in this repository.
 
-## 🔬 Development Status
+## Configuration
 
-**Status:** Initial development and research phase.
+Copy `.env.example` to `.env` in the project root and configure the path to your existing portable ComfyUI installation.
 
-Current and upcoming work includes:
+Example:
 
-* Literature review and model research.
-* Dataset identification and preprocessing.
-* Audio feature extraction and emotion recognition.
-* Facial motion prediction.
-* Talking-face video generation.
-* Model evaluation and system integration.
+```dotenv
+COMFY_PORTABLE_ROOT=C:\path\to\ComfyUI_windows_portable
+```
 
-## 👥 Contributors
+The example file documents optional FLOAT model-path overrides. Set them only when needed.
 
-Add the names of the project team members here.
+Keep `.env` private. Never commit API keys, tunnel tokens, credentials, or other secrets.
 
-## 📄 License
+## Running the Backend
 
-No license has been selected yet. Usage and distribution terms will be determined in accordance with the project's requirements and applicable dataset and model licenses.
+Open PowerShell in the project root.
+
+Set the path to your existing portable ComfyUI installation:
+
+```powershell
+$env:COMFY_PORTABLE_ROOT = "C:\path\to\ComfyUI_windows_portable"
+```
+
+Start the API using that installation's embedded Python:
+
+```powershell
+$portable = $env:COMFY_PORTABLE_ROOT
+& "$portable\python_embeded\python.exe" ".\backend\app\run.py"
+```
+
+The API listens on `http://127.0.0.1:8000`.
+
+Check its health:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok",
+  "service": "float-direct-inference"
+}
+```
+
+The backend API dependencies are listed in `backend/requirements-api.txt`. The current setup uses `backend/vendor` for its web dependencies rather than installing them into the external ComfyUI environment.
+
+## Running the Frontend
+
+Open a second terminal:
+
+```powershell
+Set-Location .\frontend
+npm.cmd install
+npm.cmd run dev
+```
+
+Open the local URL printed by Vite, normally `http://127.0.0.1:5173`.
+
+To create a production build:
+
+```powershell
+npm.cmd run build
+```
+
+The generated `frontend/dist/` directory is build output and should not be committed.
+
+## API Endpoints
+
+### Health check
+
+`GET /health`
+
+Returns the API's health status. This endpoint does not verify that the FLOAT pipeline can successfully generate a video.
+
+### Single talking-head video
+
+`POST /generate`
+
+Multipart form fields:
+
+| Field | Description |
+|---|---|
+| `image` | Reference portrait |
+| `audio` | Speech audio file |
+| `emotion` | Supported emotion |
+| `emotion_strength` | Emotion strength |
+
+The endpoint returns an MP4 video when generation succeeds.
+
+### Two-person conversation
+
+`POST /generate-conversation`
+
+The conversation endpoint accepts portraits for Alice and Bob, three audio files, character names, and configuration for each dialogue turn.
+
+The supported interface is designed for two characters and three sequential turns. Each turn specifies its speaker, dialogue, emotion, emotion strength, and duration.
+
+The endpoint returns the composed MP4 when generation succeeds.
+
+Refer to the backend route implementations for the current validation rules and supported values.
+
+## Testing
+
+Run these commands from `frontend/`.
+
+Build the frontend:
+
+```powershell
+npm.cmd run build
+```
+
+Test the conversation API flow:
+
+```powershell
+npm.cmd run test:conversation
+```
+
+Run the browser smoke test:
+
+```powershell
+npm.cmd run test:browser
+```
+
+The conversation and browser tests require the corresponding backend and browser-test prerequisites described in `frontend/README.md`.
+
+## Deployment Notes
+
+- The frontend is hosted on Cloudflare Pages.
+- The gateway is a separately configured Cloudflare Worker.
+- The backend runs in the development environment and requires access to FLOAT/ComfyUI.
+- Cloudflare Quick Tunnel URLs can change between runs; the Worker’s `BACKEND_URL` must match the active tunnel URL.
+- Network restrictions may prevent a tunnel from connecting. A deployed website does not guarantee that the generation backend is reachable.
+- Verify API authentication and gateway configuration before exposing the backend publicly.
+
+## Security
+
+- Do not commit `.env`, API keys, tunnel tokens, or private credentials.
+- Keep the backend and gateway configuration aligned.
+- Do not expose the backend directly to the public internet without appropriate access controls.
+- The actual API security configuration must be verified before claiming that protected endpoints are enabled.
+
+## Development Status
+
+The repository contains an integrated frontend, a FastAPI API, FLOAT integration, and a conversation-generation route. Generation quality, deployment connectivity, and security should be validated in the target environment.
+
+## Contributors
+
+Add the project contributors and their roles here.
+
+## License
+
+No license has been selected in this repository. Review the licensing requirements for FLOAT, ComfyUI, model weights, datasets, and third-party dependencies before distributing the project.

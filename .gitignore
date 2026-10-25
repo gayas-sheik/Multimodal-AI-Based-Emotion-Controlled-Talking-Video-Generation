@@ -18,6 +18,10 @@ frontend/edge-debug/
 backend/data/uploads/
 backend/data/outputs/
 backend/.jobs/
+backend/test_output/
 
 # Personal test image
 backend/test_data/WhatsApp Image 2026-08-13 at 19.06.32.jpeg
+
+# Local editor configuration
+.vscode/
