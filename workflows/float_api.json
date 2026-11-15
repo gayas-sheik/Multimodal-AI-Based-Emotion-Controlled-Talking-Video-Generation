@@ -1,0 +1,97 @@
+{
+  "1": {
+    "inputs": {
+      "model": "float.pth"
+    },
+    "class_type": "LoadFloatModels",
+    "_meta": {
+      "title": "Load Float Models"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": "004931.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "4": {
+    "inputs": {
+      "audio": "03-01-02-02-01-01-16.wav"
+    },
+    "class_type": "LoadAudio",
+    "_meta": {
+      "title": "Load Audio"
+    }
+  },
+  "6": {
+    "inputs": {
+      "frame_rate": [
+        "11",
+        0
+      ],
+      "loop_count": 0,
+      "filename_prefix": "AnimateDiff",
+      "format": "video/nvenc_h264-mp4",
+      "pix_fmt": "yuv420p",
+      "bitrate": 10,
+      "megabit": true,
+      "save_metadata": true,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "10",
+        0
+      ],
+      "audio": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  },
+  "10": {
+    "inputs": {
+      "a_cfg_scale": 2,
+      "r_cfg_scale": 1,
+      "e_cfg_scale": 20,
+      "fps": [
+        "11",
+        0
+      ],
+      "emotion": "disgust",
+      "crop": true,
+      "seed": 982045898717762,
+      "ref_image": [
+        "3",
+        0
+      ],
+      "ref_audio": [
+        "4",
+        0
+      ],
+      "float_pipe": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "FloatProcess",
+    "_meta": {
+      "title": "Float Process"
+    }
+  },
+  "11": {
+    "inputs": {
+      "value": 25
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "FPS"
+    }
+  }
+}

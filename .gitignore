@@ -1,0 +1,59 @@
+﻿# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyd
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# ComfyUI installation, custom nodes, models and generated files
+/comfyui/
+
+# Frontend dependencies and build output
+/frontend/node_modules/
+/frontend/.next/
+/frontend/out/
+/frontend/build/
+/frontend/.vercel/
+/frontend/.env*
+
+# Logs
+/logs/
+
+# Generated media
+*.mp4
+*.webm
+*.mov
+*.gif
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Temporary files
+*.tmp
+*.bak
+# Local backups and temporary files
+/main_secured.py
+/old-implementation.txt
+/old-main.txt
+
+
+
+# Obsolete local files
+/frontend/AGENTS.md
+
+# Obsolete legacy entry point
+/?*qq
+
+# Local backend backup
+/backend/main_backup.py
